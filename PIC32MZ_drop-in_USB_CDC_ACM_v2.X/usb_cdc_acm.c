@@ -43,7 +43,7 @@
 #include "usb.h"
 #include "usb_descriptors.h"
 
-void __ISR_AT_VECTOR(_USB_VECTOR, IPL4SRS) _USB_Handler(void){
+void __ISR(_USB_VECTOR, IPL4SRS) _USB_Handler(void) {
 
     if(USBCSR2bits.RESETIF){ // In Device mode, indicates reset signaling is detected on the bus.
         usbReset = TRUE; // Indicate the bus was reset and should be IDLE now.
