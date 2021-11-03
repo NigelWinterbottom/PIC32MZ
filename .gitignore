@@ -50,3 +50,10 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# MPLABX Generated Files
+*/dist/**/memoryfile.xml
+*/nbproject/Makefile-*
+*/nbproject/Package-default*
+*/nbproject/Private/
+*/.generated_files/
