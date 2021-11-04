@@ -17,6 +17,7 @@
       <itemPath>main.c</itemPath>
       <itemPath>usb_cdc_acm.c</itemPath>
       <itemPath>configuration_bits.c</itemPath>
+      <itemPath>configuration_bits_K988.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -29,7 +30,7 @@
     <conf name="default" type="2">
       <toolsSet>
         <developmentServer>localhost</developmentServer>
-        <targetDevice>PIC32MZ2048EFM144</targetDevice>
+        <targetDevice>PIC32MZ1024EFE100</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
         <platformTool>pkob4hybrid</platformTool>
@@ -38,7 +39,7 @@
         <platform>4</platform>
       </toolsSet>
       <packs>
-        <pack name="PIC32MZ-EF_DFP" vendor="Microchip" version="1.2.51"/>
+        <pack name="PIC32MZ-EF_DFP" vendor="Microchip" version="1.3.58"/>
       </packs>
       <compileType>
         <linkerTool>
@@ -199,6 +200,8 @@
         <property key="save-temps" value="false"/>
         <property key="wpo-lto" value="false"/>
       </C32Global>
+      <item path="configuration_bits.c" ex="true" overriding="false">
+      </item>
       <pkob4hybrid>
         <property key="ADC" value="true"/>
         <property key="AutoSelectMemRanges" value="auto"/>
