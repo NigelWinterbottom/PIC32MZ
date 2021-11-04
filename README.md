@@ -1,39 +1,21 @@
 # PIC32MZ
+
 Code and Projects for the Microchip PIC32MZ series Microcontrollers
 
 Including PIC32MZ USB without Harmony.
 
 See the Microchip forum for basic USB and USB CDC ACM examples.
-https://www.microchip.com/forums/m1083508.aspx#1083508
+<https://www.microchip.com/forums/m1083508.aspx#1083508>
 
-Here is an USB Audio Speaker example made using my USB device stack, without using Harmony.
+UPDATE - 4 Nov 2021:
 
-UPDATE - 10 May 2020:
-I added a "drop in" USB CDC ACM project. The main.c is only to be used as a reference, there are some
-settings or initializations you'd need to add/include in your own project's main.c file.
+I'm giving up with this example code because:
+    (a) Although the enumeration completes in Window-10 and a COM port gets installed. Actually opening the COM port takes about 5 minutes.
+    (b) Using Compilance Verifier from www.usbif.org rewsults in the following errors.
 
-It will work as-is for testing but it's intended to be copied into your project to save time and effort.
-You only need to copy everything except the main.c file unless you intend to start your project with that.
-
-There are four (4) files:
-main.c
-usb_cdc_acm.c
-usb.h
-usb_descriptors.h
- 
-NOTE: Pin/Port F3 is used on 100 and 144 pin device for the USBID. It may be different on other packages.
-You can find the board initialization void initBoard() in main.c and you'll see:
- CNPUFbits.CNPUF3 = 1;       // Pull-up enabled on RPF3 (To set USB as a B-Device ) 
- Also if you're using the USBID pin you probably won't need to enable the pull-up resistor (on RPF3),
- devices such as the PIC32MZ DA have a decicated USBID pin.
-
-UPDATE - 10 September 2020:
-I finally learned how to get the USB DMA to work. I may add an USB Audio Speaker with DMA example later
-but for now check the forum link above. I describe how to use the USB DMA in the update, in the first
-post.
+        * Failed to get the Device Qualifier Descriptor
+        * Couldn't get count of Other Speed configuration descriptors.
 
 
-Mark S. Lewis AKA MisterHemi
-
-mark(at)LewisTechnoGroup.com,
- misterhemi(at)yahoo.com
+Nigel Winterbottom
+nigelwinterbottom [@] gmail [dot] com
