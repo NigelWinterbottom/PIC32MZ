@@ -51,17 +51,17 @@
 #define VBUS_VALID 0x3
 
 /*********** Variable Declarations ***********/
-volatile int ep0rbc;        // Endpoint 0 - Received Bytes Count (USB).
-volatile int ep3rbc;        // Endpoint 3 - Received Bytes Count (USB).
+volatile uint32_t ep0rbc;   // Endpoint 0 - Received Bytes Count (USB).
+volatile uint32_t ep3rbc;   // Endpoint 3 - Received Bytes Count (USB).
 volatile uint32_t i;
 volatile uint32_t i2;
 uint8_t *ep0usbData;
 uint8_t *ep1usbData;
 uint8_t *ep2usbData;
 uint8_t endpoint;
-uint8_t *ep0BlockData;
-uint8_t *ep1BlockData;
-uint8_t *ep2BlockData;
+void    *ep0BlockData;
+void    *ep1BlockData;
+void    *ep2BlockData;
 uint8_t enableUSB;
 uint16_t NumBytes, packetSize;
 uint16_t packetSize_ep0, packetSize_ep1, packetSize_ep2;
@@ -114,7 +114,7 @@ int txBlock_ep0(uint16_t NumBytes_ep0);
 int txBlock_ep1(uint16_t NumBytes_ep1);
 void txByte_ep2(uint16_t ep2ArrPos);
 int txBlock_ep2(uint16_t NumBytes_ep2);
-int rxUSB_ep0(volatile int ep0rbc);
+void rxUSB_ep0(uint32_t ep0rbc);
 void rxUSB_ep3(void);
 void sendMessage_ep2(void);
 /******** End of Function Declarations *******/

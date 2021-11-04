@@ -450,6 +450,7 @@ void controlTrans(){
                 } // End of switch ep0data[3].
 
         } // End of case 0x8006 switch - Get Descriptor(s).
+        break;
 
         case 0x810A: // Get Interface
             ep0BlockData = &usbInterface;
@@ -521,7 +522,7 @@ void txUSB_ep0(uint32_t ep0TXLen){
             ep0fifo = (uint8_t *)&USBFIFO0;
 
             for(ep0ArrPos = 0; ep0ArrPos < ep0TXLen; ep0ArrPos++){
-                *ep0fifo = ep0usbData[ep0ArrPos];
+                *ep0fifo = ((uint8_t*)ep0usbData)[ep0ArrPos];
             }
 
                 USBE0CSR0bits.TXRDY = 1;
@@ -531,7 +532,6 @@ int txBlock_ep0(uint16_t NumBytes_ep0){
 
     volatile uint8_t *ep0fifo = NULL;
     ep0fifo = (uint8_t *)&USBFIFO0;
-    uint16_t ep0ArraySize = packetSize_ep0;
     char setEnd = FALSE;
 
     packetSize_ep0 = NumBytes_ep0;
@@ -559,7 +559,7 @@ int txBlock_ep0(uint16_t NumBytes_ep0){
             }
 
             for(i = 0; i < packetSize_ep0; i++) {
-                *ep0fifo = ep0BlockData[ep0ArrPos++];
+                *ep0fifo = ((uint8_t*)ep0BlockData)[ep0ArrPos++];
                 ep0RemainingBytes--;
             }
 
@@ -583,7 +583,6 @@ int txBlock_ep1(uint16_t NumBytes_ep1){
 
     volatile uint8_t *ep1fifo = NULL;
     ep1fifo = (uint8_t *)&USBFIFO1;
-    uint16_t ep1ArraySize = sizeof(ep1BlockData);
     char setEnd = FALSE;
 
     packetSize_ep1 = NumBytes_ep1;
@@ -611,7 +610,7 @@ int txBlock_ep1(uint16_t NumBytes_ep1){
             }
 
             for(i = 0; i < packetSize_ep1; i++) {
-                *ep1fifo = ep1BlockData[ep1ArrPos++];
+                *ep1fifo = ((uint8_t*)ep1BlockData)[ep1ArrPos++];
                 ep1RemainingBytes--;
             }
 
@@ -642,7 +641,7 @@ void txByte_ep2(uint16_t ep2ArrPos){
                 timeout++;
             }while(USBE2CSR0bits.FIFONE && timeout < 800);
 
-                *ep2fifo = (uint8_t)ep2BlockData[ep2ArrPos];
+                *ep2fifo = ((uint8_t*)ep2BlockData)[ep2ArrPos];
 
                 USBE2CSR0bits.TXPKTRDY = 1;
 }
@@ -651,7 +650,6 @@ int txBlock_ep2(uint16_t NumBytes_ep2){
 
     volatile uint8_t *ep2fifo = NULL;
     ep2fifo = (uint8_t *)&USBFIFO2;
-    uint16_t ep2ArraySize = sizeof(ep2BlockData);
     char setEnd_ep2 = FALSE;
 
     packetSize_ep2 = NumBytes_ep2;
@@ -680,7 +678,7 @@ int txBlock_ep2(uint16_t NumBytes_ep2){
 
             for(i2 = 0; i2 < packetSize_ep2; i2++) {
 
-                *ep2fifo = (uint8_t)ep2BlockData[ep2ArrPos++];
+                *ep2fifo = ((uint8_t*)ep2BlockData)[ep2ArrPos++];
                 ep2RemainingBytes--;
             }
 
@@ -699,7 +697,7 @@ int txBlock_ep2(uint16_t NumBytes_ep2){
 return 0;
 }
 
-int rxUSB_ep0(volatile int ep0rbc){
+void rxUSB_ep0 (uint32_t ep0rbc) {
     timeout_ep0 = 0;
             do{
                 timeout_ep0++;

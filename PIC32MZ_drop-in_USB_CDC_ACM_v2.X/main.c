@@ -145,7 +145,6 @@
 #pragma config PMDL1WAY =   OFF
 #pragma config IOL1WAY =    OFF
 #pragma config FUSBIDIO =   ON
-#pragma confif DMAPRI =     ON
 
 /*** BF1SEQ0 ***/
 #pragma config TSEQ =       0xFFFF
@@ -171,7 +170,8 @@ void initBoard(void);
 
 
 
-void main(void){
+int main (void)
+{
     initBoard();
     initUSB();
     enableUSB = TRUE;
